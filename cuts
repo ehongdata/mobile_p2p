@@ -1,0 +1,154 @@
+## Setting working directory
+setwd("/Users/purchasedanalyst/Dropbox (Purchased)/Google Samsung Mobile Phone P2P/Reporting/Final Report/02FinalData20150930")
+
+## Reading participant dump and saving a version only for P3 completes
+partDump <- read.csv("RawData/Part20150930.csv", header = TRUE)
+partDumpP3 <- partDump[which(partDump$FINAL_SURVEY_COMPLETED == 1), ]
+write.csv(partDumpP3, "Cuts/PartP320150930.csv", row.names = FALSE)
+
+## Selecting necessary cuts from participant dump and saving
+cutsFromPart <- c("ct_id", "ethnicity", "gender", "age", "hispanic", "household_income", "marital_status", "research_group")
+partDumpP3Cuts <- partDumpP3[cutsFromPart]
+write.csv(partDumpP3Cuts, "Cuts/CutsFromPart.csv", row.names = FALSE)
+
+## Reading pre-tracking survey and creating cuts IMPORTANT: need to replace all the single quote in the open ended answers with double quote in the raw file
+PreTracking <- read.csv("Edited/PreEdited20150930.csv", header = TRUE)
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_TYPE_1988 == 3] <- "Apple"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 1] <- "Amazon"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 2] <- "HTC"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 3] <- "LG"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 4] <- "Motorola"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 5] <- "Nexus"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 6] <- "Samsung"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 7] <- "Sony Ericsson"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 8] <- "Other Brand"
+PreTracking$PhoneBrand[PreTracking$QUALIFICATION_QUESTIONS_PHONE_ANDROID_BRAND_1989 == 9] <- "Do not know the current phone brand"
+
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 1] <- "AT&T"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 2] <- "Boost Mobile"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 3] <- "Cricket Wireless"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 4] <- "MetroPCS"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 5] <- "Sprint"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 6] <- "T-Mobile"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 7] <- "U.S. Cellular"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 8] <- "Verizon Wireless"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 9] <- "Other WSP"
+PreTracking$wsp[PreTracking$QUALIFICATION_QUESTIONS_WSP_CURRENT_1992 == 10] <- "Do not know the current WSP"
+
+PreTracking$whereAreYou[PreTracking$QUALIFICATION_QUESTIONS_PHONE_PUR_CYCLE_1987 == 1] <- "I know I want to buy a new smartphone but do not have specific brands or models in mind yet"
+PreTracking$whereAreYou[PreTracking$QUALIFICATION_QUESTIONS_PHONE_PUR_CYCLE_1987 == 2] <- "I am deciding among a few brands or models of smartphones"
+PreTracking$whereAreYou[PreTracking$QUALIFICATION_QUESTIONS_PHONE_PUR_CYCLE_1987 == 3] <- "I am deciding among a few brands or models of smartphones"
+PreTracking$whereAreYou[PreTracking$QUALIFICATION_QUESTIONS_PHONE_PUR_CYCLE_1987 == 4] <- "I have decided which smartphone brand and model I want to buy, but not where I want to buy it"
+PreTracking$whereAreYou[PreTracking$QUALIFICATION_QUESTIONS_PHONE_PUR_CYCLE_1987 == 5] <- "I have decided which smartphone brand and model I want to buy and where I want to buy it"
+
+cutsFromPre <- c("user_study_id", "PhoneBrand", "wsp", "whereAreYou")
+PreTrackingCuts <- PreTracking[cutsFromPre]
+write.csv(PreTrackingCuts, "Cuts/CutsFromPre.csv", row.names = FALSE)
+
+## Reading post-purchase poll and creating cuts
+PostPurch <- read.csv("Edited/PostPurchEdited20150930.csv", header = TRUE)
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 1] <- "Amazon"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 2] <- "Apple"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 3] <- "Blackberry"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 4] <- "HTC"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 5] <- "LG"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 6] <- "Motorola"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 7] <- "Nexus"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 8] <- "Nokia"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 9] <- "Samaung"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 10] <- "Sony Ericsson"
+PostPurch$MfgPurchased[PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 == 11] <- "Other Mfg Brand for new smartphone"
+
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 1] <- "AT&T"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 2] <- "Boost Mobile"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 3] <- "Cricket Wireless"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 4] <- "MetroPCS"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 5] <- "Sprint"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 6] <- "T-Mobile"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 7] <- "U.S. Celluar"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 8] <- "Verizon Wireless"
+PostPurch$WSPpurchased[PostPurch$POST_PURCHASE_POLL_WSP_NEW_2153 == 9] <- "Other WSP"
+
+
+PostPurchPhone <- PostPurch[which(PostPurch$POST_PURCHASE_POLL_MFG_NEW_2151 > 0), ]
+
+cutsFromPostPurch <- c("user_study_id", "MfgPurchased", "WSPpurchased")
+PostPurchCuts <- PostPurchPhone[cutsFromPostPurch]
+write.csv(PostPurchCuts, "Cuts/CutsFromPostPurch.csv", row.names = FALSE)
+
+
+## Combining all the cuts
+cutsFromPartAndPre <- merge(x = partDumpP3Cuts, y = PreTrackingCuts, by.x = "ct_id", by.y = "user_study_id")
+names(cutsFromPartAndPre)[names(cutsFromPartAndPre)=="ct_id"] <- "user_study_id"
+
+cutsP3 <- merge(x=cutsFromPartAndPre, y=PostPurchCuts, by.x="user_study_id", by.y="user_study_id", all.x= TRUE)
+write.csv(cutsP3, "Cuts/CutsP3.csv", row.names = FALSE)
+
+## Joining pre-tracking survey and cuts
+PreTrackingWithCuts <- merge(x=cutsP3, y=PreTracking)
+varsToDropPre <- names(PreTrackingWithCuts) %in% c("is_fraud", "QUALIFICATION_QUESTIONS_SCREENER_INTRO_1985", "is_fraud.1",
+                                                "STUDY_SPECIFIC_QUESTIONS_BOILER_1997", "activity_id", "activity", "activity_brand", "activity_time",
+                                                "chained_activity", "receipt_yn", "trigger_receipt_id", "trigger_receipt_activity_id", "user_question_id.1",
+                                                "user_id.1", "completed_time.1", "qgroup_type.1", "activity_id.1", "activity.1", "activity_brand.1", 
+                                                "activity_time.1", "chained_activity.1", "receipt_yn.1", "trigger_receipt_id.1", "trigger_receipt_activity_id.1" )
+PreTrackingWithCuts <- PreTrackingWithCuts[!varsToDropPre]
+PreTrackingWithCuts$Source <- "Pre-Tracking"
+write.csv(PreTrackingWithCuts, "DataWithCuts/PreWithCuts20150930.csv", row.names = FALSE)
+
+## Joining post-tracking survey and cuts
+PostTracking <- read.csv("Edited/PostEdited20150930.csv", header = TRUE)
+PostTrackingWithCuts <- merge(x=cutsP3, y=PostTracking)
+varsToDropPost <- names(PostTrackingWithCuts) %in% c("is_fraud", "FINAL_SURVEY_BOILER_2187", "activity_id", 
+                                                     "activity", "activity_brand", "activity_time", "chained_activity", 
+                                                     "receipt_yn", "trigger_receipt_id", "trigger_receipt_activity_id")
+PostTrackingWithCuts <- PostTrackingWithCuts[!varsToDropPost]
+PostTrackingWithCuts$Source <- "Post-Tracking"
+write.csv(PostTrackingWithCuts, "DataWithCuts/PostWithCuts20150930.csv", row.names = FALSE)
+
+## Joining post purchase polls and cuts
+PostPurch <- read.csv("Edited/PostPurchEdited20150930.csv", header = TRUE)
+PostPurchWithCuts <- merge(x=cutsP3, y=PostPurch)
+varsToDropPostPurch <- names(PostPurchWithCuts) %in% c("is_fraud", "POST_PURCHASE_POLL_CONGRATS_TEXT_DISPLAY_2149", 
+                                                       "user_study_id.1", "user_study_id.2", "chained_activity")
+PostPurchWithCuts <- PostPurchWithCuts[!varsToDropPostPurch]
+PostPurchWithCuts$Source <- "Post-Purchase"
+write.csv(PostPurchWithCuts, "DataWithCuts/PostPurchWithCuts20150930.csv", row.names = FALSE)
+
+## Joining PRSO and cuts
+PRSO <- read.csv("Edited/PRSOedited20150930.csv", header = TRUE)
+PRSOwithCuts <- merge(x=cutsP3, y=PRSO)
+varsToDropPRSO <- names(PRSOwithCuts) %in% c("is_fraud", "PLANNING__RESEARCH__SHOPPING_ONLINE_BOILER_2045", 
+                                             "user_study_id.1", "user_study_id.2", "user_study_id.3",
+                                             "user_study_id.4", "user_study_id.5", "activity", "activity_brand",
+                                             "chained_activity", "receipt_yn", "trigger_receipt_id", "trigger_receipt_activity_id")
+PRSOwithCuts <- PRSOwithCuts[!varsToDropPRSO]
+PRSOwithCuts$Source <- "PRSO"
+write.csv(PRSOwithCuts, "DataWithCuts/PRSOwithCuts20150930.csv", row.names = FALSE)
+
+## Joining StoreDep and cuts
+StoreDep <- read.csv("Edited/StoreDepEdited20150930.csv", header = TRUE)
+StoreDepWithCuts <- merge(x=cutsP3, y=StoreDep)
+varsToDropStoreDep <- names(StoreDepWithCuts) %in% c("is_fraud", "PHYSICAL_STORE_DEPARTURE_BOILER_LEAVE_PHYSICAL_STORE_2111", 
+                                             "user_study_id.1", "user_study_id.2", "user_study_id.3", "receipt_yn", 
+                                             "trigger_receipt_id", "trigger_receipt_activity_id")
+StoreDepWithCuts <- StoreDepWithCuts[!varsToDropStoreDep]
+StoreDepWithCuts$Source <- "Store Departure"
+write.csv(StoreDepWithCuts, "DataWithCuts/StoreDepWithCuts20150930.csv", row.names = FALSE)
+
+## Joining Activity dump and cuts
+Act <- read.csv("RawData/Act20150930.csv", header = TRUE)
+ActWithCuts <- merge(x=cutsP3, y=Act)
+varsToDropAct <- names(ActWithCuts) %in% c("is_fraud", "activity_weekofyear", "lat", "long", "4SQ_address1",
+                                                "4SQ_address2", "4SQ_city", "4SQ_state", "4SQ_zip", "video",
+                                                "photo", "audio", "text_note", "completed_final_survey", "study_participant_source",
+                                                "user_question_id")
+ActWithCuts <- ActWithCuts[!varsToDropAct]
+ActWithCuts$Source <- "Activity Dump"
+write.csv(ActWithCuts, "DataWithCuts/ActWithCuts20150930.csv", row.names = FALSE)
+
+## Joining Item dump and cuts
+Item <- read.csv("RawData/Item20150930.csv", header = TRUE)
+ItemWithCuts <- merge(x=cutsP3, y=Item)
+ItemWithCuts$Source <- "Item Export"
+write.csv(ItemWithCuts, "DataWithCuts/ItemWithCuts20150930.csv", row.names = FALSE)
+
