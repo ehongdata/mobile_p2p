@@ -1,0 +1,48 @@
+## Setting working directory
+setwd("/Users/purchasedanalyst/Dropbox (Purchased)/Google Samsung Mobile Phone P2P/Reporting/Final Report/02FinalData20150930")
+
+## Transpose Pre-tracking survey
+library(reshape2)
+PreTrackingWithCuts <- read.csv("DataWithCuts/PreWithCuts20150930.csv", stringsAsFactors=FALSE)
+Pre_transposed <- melt(PreTrackingWithCuts, id = c("user_study_id", "ethnicity", "gender", "age", "hispanic", 
+                                                   "household_income", "marital_status", "research_group", 
+                                                   "PhoneBrand", "wsp", "whereAreYou", "MfgPurchased", "WSPpurchased", "user_question_id",
+                                                   "user_id", "completed_time", "qgroup_type", "Source"))
+write.csv(Pre_transposed, "Transposed/Pre_transposed.csv", row.names = FALSE)
+
+## Transpose Store Departure elaboration
+StoreDepWithCuts <- read.csv("DataWithCuts/StoreDepWithCuts20150930.csv")
+StoreDep_transposed <- melt(StoreDepWithCuts, id = c("user_study_id", "ethnicity", "gender", "age", "hispanic", 
+                                                     "household_income", "marital_status", "research_group", 
+                                                     "PhoneBrand", "wsp", "whereAreYou", "MfgPurchased", "WSPpurchased", "user_question_id",
+                                                     "user_id", "completed_time", "qgroup_type", "activity_id", 
+                                                     "activity", "activity_brand", "activity_time", "chained_activity",
+                                                     "Source"))
+write.csv(StoreDep_transposed, "Transposed/StoreDep_transposed.csv", row.names = FALSE)
+
+## Transpose PRSO elaboration
+PRSOwithCuts <- read.csv("DataWithCuts/PRSOwithCuts20150930.csv")
+PRSO_transposed <- melt(PRSOwithCuts, id = c("user_study_id", "ethnicity", "gender", "age", "hispanic", 
+                                             "household_income", "marital_status", "research_group", 
+                                             "PhoneBrand", "wsp", "whereAreYou", "MfgPurchased", "WSPpurchased", "user_question_id",
+                                             "user_id", "completed_time", "qgroup_type", "Source", "activity_id", "activity_time"))
+write.csv(PRSO_transposed, "Transposed/PRSO_transposed.csv", row.names = FALSE)
+
+## Transpose Post purchase poll
+PostPurchWithCuts <- read.csv("DataWithCuts/PostPurchWithCuts20150930.csv")
+PostPurch_transposed <- melt(PostPurchWithCuts, id = c("user_study_id", "ethnicity", "gender", "age", "hispanic", 
+                                                       "household_income", "marital_status", "research_group", 
+                                                       "PhoneBrand", "wsp", "whereAreYou", "MfgPurchased", "WSPpurchased", "user_question_id",
+                                                       "user_id", "completed_time", "qgroup_type", "activity_id",
+                                                       "activity", "activity_brand", "activity_time", "receipt_yn",
+                                                        "trigger_receipt_id", "trigger_receipt_activity_id" ,"Source"))
+write.csv(PostPurch_transposed, "Transposed/PostPurch_transposed.csv", row.names = FALSE)
+
+## Transpose Post-tracking survey
+PostTrackingWithCuts <- read.csv("DataWithCuts/PostWithCuts20150930.csv")
+Post_transposed <- melt(PostTrackingWithCuts, id = c("user_study_id", "ethnicity", "gender", "age", "hispanic", 
+                                                     "household_income", "marital_status", "research_group", 
+                                                     "PhoneBrand", "wsp", "whereAreYou", "MfgPurchased", "WSPpurchased", "user_question_id",
+                                                     "user_id", "completed_time", "qgroup_type", "Source"))
+write.csv(Post_transposed, "Transposed/Post_transposed.csv", row.names = FALSE)
+
