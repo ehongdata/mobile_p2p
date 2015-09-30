@@ -1,0 +1,33 @@
+## Setting working directory
+setwd("/Users/purchasedanalyst/Dropbox (Purchased)/Google Samsung Mobile Phone P2P/Reporting/Final Report/02FinalData20150930")
+
+## selecting unique variables and values
+pre <- read.csv("Transposed/Pre_transposed.csv", header = TRUE)
+varToPick <- c("variable", "value")
+prevarvalue <- pre[varToPick]
+uniquePreVarValue <- prevarvalue[!duplicated(prevarvalue), ]
+write.csv(uniquePreVarValue, "UniqueVarValue/uniquePreVarValue.csv", row.names = FALSE)
+
+post <- read.csv("Transposed/Post_transposed.csv", header = TRUE)
+varToPick <- c("variable", "value")
+postvarvalue <- post[varToPick]
+uniquePostVarValue <- postvarvalue[!duplicated(postvarvalue), ]
+write.csv(uniquePostVarValue, "UniqueVarValue/uniquePostVarValue.csv", row.names = FALSE)
+
+postpurch <- read.csv("Transposed/PostPurch_transposed.csv", header = TRUE)
+varToPick <- c("variable", "value")
+postpurchvarvalue <- postpurch[varToPick]
+uniquePostPurchVarValue <- postpurchvarvalue[!duplicated(postpurchvarvalue), ]
+write.csv(uniquePostPurchVarValue, "UniqueVarValue/uniquePostPurchVarValue.csv", row.names = FALSE)
+
+PRSO <- read.csv("Transposed/PRSO_transposed.csv", header = TRUE)
+varToPick <- c("variable", "value")
+PRSOvarvalue <- PRSO[varToPick]
+uniquePRSOVarValue <- PRSOvarvalue[!duplicated(PRSOvarvalue), ]
+write.csv(uniquePRSOVarValue, "UniqueVarValue/uniquePRSOVarValue.csv", row.names = FALSE)
+
+StoreDep <- read.csv("Transposed/StoreDep_transposed.csv", header = TRUE)
+varToPick <- c("variable", "value")
+StoreDepvarvalue <- StoreDep[varToPick]
+uniqueStoreDepVarValue <- StoreDepvarvalue[!duplicated(StoreDepvarvalue), ]
+write.csv(uniqueStoreDepVarValue, "UniqueVarValue/uniqueStoreDepVarValue.csv", row.names = FALSE)
