@@ -1,0 +1,32 @@
+## Setting working directory
+setwd("/Users/purchasedanalyst/Dropbox (Purchased)/Google Samsung Mobile Phone P2P/Reporting/Final Report/02FinalData20150930")
+
+pre <- read.csv("Transposed/Pre_transposed.csv", header = TRUE)
+pre_helper <- read.csv("Helper/PreHelper.csv", header = TRUE)
+Pre_merged <- merge(x=pre, y=pre_helper, by.x = c("variable", "value"), by.y= c("variable", "value"), all.x= TRUE)
+Pre_merged_reordered <- Pre_merged[, c(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,1,2,20,21,22,23)]
+write.csv(Pre_merged_reordered, "FinalDataSet/Pre_transposed_with_helper.csv", row.names = FALSE)
+
+post <- read.csv("Transposed/Post_transposed.csv", header = TRUE)
+post_helper <- read.csv("Helper/PostHelper.csv", header = TRUE)
+Post_merged <- merge(x=post, y=post_helper, by.x = c("variable", "value"), by.y= c("variable", "value"), all.x= TRUE)
+Post_merged_reordered <- Post_merged[, c(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,1,2,20,21,22,23)]
+write.csv(Post_merged_reordered, "FinalDataSet/Post_transposed_with_helper.csv", row.names = FALSE)
+
+postpurch <- read.csv("Transposed/PostPurch_transposed.csv", header = TRUE)
+postpurch_helper <- read.csv("Helper/PostPurchHelper.csv", header = TRUE)
+PostPurch_merged <- merge(x=postpurch, y=postpurch_helper, by.x = c("variable", "value"), by.y= c("variable", "value"), all.x= TRUE)
+PostPurch_merged_reordered <- PostPurch_merged[, c(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,1,2,27,28,29,30)]
+write.csv(PostPurch_merged_reordered, "FinalDataSet/PostPurch_transposed_with_helper.csv", row.names = FALSE)
+
+PRSO <- read.csv("Transposed/PRSO_transposed.csv", header = TRUE)
+PRSO_helper <- read.csv("Helper/PRSOHelper.csv", header = TRUE)
+PRSO_merged <- merge(x=PRSO, y=PRSO_helper, by.x = c("variable", "value"), by.y= c("variable", "value"), all.x= TRUE)
+PRSO_merged_reordered <- PRSO_merged[, c(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,1,2,20,21,22, 23, 24,25)]
+write.csv(PRSO_merged_reordered, "FinalDataSet/PRSO_transposed_with_helper.csv", row.names = FALSE)
+
+StoreDep <- read.csv("Transposed/StoreDep_transposed.csv", header = TRUE)
+StoreDep_helper <- read.csv("Helper/StoreDepHelper.csv", header = TRUE)
+StoreDep_merged <- merge(x=StoreDep, y=StoreDep_helper, by.x = c("variable", "value"), by.y= c("variable", "value"), all.x= TRUE)
+StoreDep_merged_reordered <- StoreDep_merged[, c(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,1,2,23,24,25,26,27,28)]
+write.csv(StoreDep_merged_reordered, "FinalDataSet/StoreDep_transposed_with_helper.csv", row.names = FALSE)
